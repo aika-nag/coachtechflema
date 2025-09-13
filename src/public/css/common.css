@@ -1,0 +1,18 @@
+.header {
+    height: 82px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+}
+
+
+.logo {
+    height: 36px;
+    width: 370px;
+    margin-left: 25px;
+    padding-left: 0;
+}
+
+.logo__image {
+    width: 100%;
+}
