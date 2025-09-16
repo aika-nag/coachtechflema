@@ -11,30 +11,30 @@
     <p class="title">会員登録</p>
     <div class="input">
         <label class="input_item" for="name">ユーザー名</label>
-        <input type="text" name="name" id="name">
+        <input type="text" name="name" id="name" value="{{ old('name') }}">
         @error('name')
-        <p>{{ $errors -> first('name') }}</p>
+        <p class="error">{{ $errors -> first('name') }}</p>
         @enderror
     </div>
     <div class="input">
         <label class="input_item" for="email">メールアドレス</label>
-        <input type="email" name="email" id="email">
+        <input type="email" name="email" id="email" value="{{ old('email') }}">
         @error('email')
-        <p>{{ $errors -> first('email') }}</p>
+        <p class="error">{{ $errors -> first('email') }}</p>
         @enderror
     </div>
     <div class="input">
         <label class="input_item" for="password">パスワード</label>
         <input type="password" name="password" id="password">
         @error('password')
-        <p>{{ $errors -> first('password') }}</p>
+        <p class="error">{{ $errors -> first('password') }}</p>
         @enderror
     </div>
     <div class="input">
         <label class="input_item" for="password_confirmation">確認用パスワード</label>
         <input type="password" name="password_confirmation" id="password_confirmation">
         @error('password_confirmation')
-        <p>{{ $errors -> first('password_confirmation') }}</p>
+        <p class="error">{{ $errors -> first('password_confirmation') }}</p>
         @enderror
     </div>
 
