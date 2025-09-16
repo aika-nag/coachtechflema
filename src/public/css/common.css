@@ -9,10 +9,22 @@
 .logo {
     height: 36px;
     width: 370px;
-    margin-left: 25px;
+    margin-left: 40px;
     padding-left: 0;
 }
 
 .logo__image {
     width: 100%;
+}
+
+.input_bar {
+    padding: 15px 31px;
+}
+
+.nav {
+    padding: 15px 30px;
+}
+
+.main {
+    max-width: 1512px;
 }

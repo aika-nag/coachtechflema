@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,4 @@ Route::get('/', function () {
 });
 
 Route::get('/', [ItemController::class, 'index']);
+Route::post('/register', [UserController::class,'store']);

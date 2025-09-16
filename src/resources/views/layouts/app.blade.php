@@ -14,13 +14,13 @@
 <body>
   <header class="header">
     <div class="logo">
-      <img src="../../../../logo.svg" alt="coachtechロゴ" class="logo__image">
+      <img src="../../../../images/logo.svg" alt="coachtechロゴ" class="logo__image">
     </div>
-    <div>
+    <div class=input_bar>
       @yield('input_bar')
     </div>
-    <div>
-      @yield('button')
+    <div class="nav">
+      @yield('nav')
     </div>
   </header>
 

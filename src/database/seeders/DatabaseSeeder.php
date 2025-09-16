@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use CreateItemCategoriesTable;
 use Illuminate\Database\Seeder;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,5 +16,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+        $this->call(CategoriesTableSeeder::class);
+        User::factory(10)->create();
+        $this->call(ItemsTableSeeder::class);
     }
 }
