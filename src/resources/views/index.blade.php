@@ -5,25 +5,38 @@
 @endsection
 
 @section('input_bar')
-<input type="text" class="search" placeholder="なにをお探しですか？">
+<form action="/item/find" method="post">
+    @csrf
+    <input type="text" class="search" name="search" placeholder="なにをお探しですか？" value="{{ $input }}">
+</form>
 @endsection
 
 @section('nav')
-<button class="logout">ログアウト</button>
-<button class="mypage">マイページ</button>
-<button class="sell">出品</button>
+<form action="/logout" class="logout" method="post">
+    @csrf
+    <button class="logout_button">ログアウト</button>
+</form>
+<form action="" class="mypage">
+    <button class="mypage_button">マイページ</button>
+</form>
+<form action="/sell" class="sell" method="get">
+    <button class="sell_button">出品</button>
+</form>
 @endsection
 
 @section('content')
   <div class="content">
     <div class="title">
         <p class='recommend'>おすすめ</p>
-        <p class="mylist">マイリスト</p>
+        <form action="/?tab=mylist" method="post">
+          @csrf
+          <button class="mylist">マイリスト</button>
+        </form>
     </div>
     <div class="items">
         @foreach ($items as $item)
         <div class="item_img">
-            <img src="{{ asset('images' . $item -> image) }}" alt="商品画像" class="image">
+            <a href="/item/{{ $item ->id }}"><img src="{{ asset('images' . $item -> image) }}" alt="{{ $item -> name }}" class="image"></a>
             <p class="item_name">{{ $item -> name }}</p>
         </div>
         @endforeach

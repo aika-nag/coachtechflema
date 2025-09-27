@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ItemController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -15,10 +15,17 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware('auth')->group(function(){
+    Route::get('/', [ItemController::class, 'index']);
+    Route::post('/item/{item_id}/favorite', [ItemController::class, 'favorite']);
+    Route::get('/sell', [ItemController::class, 'sell']);
+    Route::post('/', [ItemController::class, 'mylist']);
+    Route::get('/mypage/profile', [ProfileController::class, 'index']);
 });
 
-Route::get('/', [ItemController::class, 'index']);
-Route::post('/register', [UserController::class,'store']);
+Route::get('/item/{item_id}', [ItemController::class,'detail']);
+
+Route::post('/item/find', [ItemController::class, 'search']);
+
+
+

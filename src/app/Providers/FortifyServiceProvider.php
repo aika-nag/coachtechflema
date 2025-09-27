@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
+use App\Http\Requests\LoginRequest;
+use Laravel\Fortify\Contracts\RegisterResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -21,6 +24,12 @@ class FortifyServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
+        $this->app->instance(RegisterResponse::class, new class implements RegisterResponse {
+            public function toResponse($request)
+            {
+                return redirect('/mypage/profile');
+            }
+        });
     }
 
     /**
@@ -28,18 +37,22 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-       Fortify::registerView(function () {
-        return view('auth.register');
-       });
+        Fortify::createUsersUsing(CreateNewUser::class);
 
-       Fortify::loginView(function () {
-        return view('auth.login');
-       });
+        Fortify::registerView(function () {
+            return view('auth.register');
+        });
 
-       RateLimiter::for('login', function (Request $request) {
-        $email = (string) $request->email;
+        Fortify::loginView(function () {
+            return view('auth.login');
+        });
 
-        return Limit::perMinute(10)->by($email . $request->ip());
-       });
+        RateLimiter::for('login', function (Request $request) {
+            $email = (string) $request->email;
+
+            return Limit::perMinute(10)->by($email . $request->ip());
+        });
+
+        $this->app->bind(FortifyLoginRequest::class, LoginRequest::class);
     }
 }

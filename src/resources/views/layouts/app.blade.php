@@ -14,13 +14,15 @@
 <body>
   <header class="header">
     <div class="logo">
-      <img src="../../../../images/logo.svg" alt="coachtechロゴ" class="logo__image">
+      <a href="/"><img src="../../../../images/logo.svg" alt="coachtechロゴ" class="logo__image"></a>
     </div>
     <div class=input_bar>
       @yield('input_bar')
     </div>
     <div class="nav">
+      @if(Auth::check())
       @yield('nav')
+      @endif
     </div>
   </header>
 
