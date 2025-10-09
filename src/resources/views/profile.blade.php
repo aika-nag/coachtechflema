@@ -26,16 +26,13 @@
 
 @section('content')
   <div class="content">
-    <form action="" class="profile__form" method="post">
+    <form action="/mypage/profile" class="profile__form" method="post" enctype="multipart/form-data">
         @csrf
             <p class="title">プロフィール設定</p>
-        <div class="input">
-                @if ($profile->image === null)
-                <img class="default_icon" src="{{ asset('default_icon.png')}}" alt="アイコン画像を登録できます">
-                @else
-                <img class="user_icon" src="{{ Storage::url($profile->image)}}" alt="プロフィール画像">
-                @endif
-                <flux:input type="file" name="image" id="image">
+        <div class="icon">
+                <img class="icon_image" id="avatarPreview" src="{{ asset('images/default_icon.png')}}" alt="プロフィール画像">
+                <label for="avatarInput" class="upload">画像を選択する</label>
+                 <input type="file" id="avatarInput" name="image" class="file_input" accept="image/*">
 
         </div>
         <div class="input">
@@ -70,3 +67,22 @@
     </form>
   </div>
 @endsection
+@section('js')
+<script>
+    $('#avatarInput').on('change', function(ev) {
+
+        const reader = new FileReader();
+
+        const fileName = ev.target.files[0].name;
+
+        reader.onload = function(ev) {
+            // 読み込んだ画像データをプレビュー画像に設定
+            $('#avatarPreview').attr('src', ev.target.result);
+        }
+
+        // ファイルをデータURLとして読み込む
+        reader.readAsDataURL(this.file[0]);
+    })
+</script>
+@endsection
+

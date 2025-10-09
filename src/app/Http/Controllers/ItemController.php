@@ -7,25 +7,31 @@ use Illuminate\Database\Eloquent\Collection;
 use App\Models\Item;
 use App\Models\CategoryItem;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Favorite;
 use App\Models\User;
+use App\Models\Profile;
 
 class ItemController extends Controller
 {
     //
     public function index(Request $request)
     {
-        $input = $request->input('search');
+        $input = '';
         $items = Item::all();
         return view('index', compact('input','items'));
     }
 
     public function detail(Item $item_id, Request $request)
     {
+        $comments = Comment::where('item_id', $item_id->id)->get();
+
         $data = [
             'input' => $request->input('search'),
-            'item' => $item_id
+            'item' => $item_id,
+            'comments' => $comments
         ];
+
         return view('item', $data);
     }
 
@@ -42,8 +48,9 @@ class ItemController extends Controller
 
     public function sell(Request $request)
     {
+        $categories = Category::all();
         $input = $request->input('search');
-        return view('sell', compact('input'));
+        return view('sell', compact('input', 'categories'));
     }
 
     public function favorite(Item $item_id)
@@ -66,16 +73,80 @@ class ItemController extends Controller
 
     public function mylist(Request $request)
     {
+        //ログイン中のユーザーidを取得
         $user = auth()->user();
-        $favoriteitems = $user->favorites()->get();
+
+        if ($user != null) {
+        //Favoritesテーブルからログインユーザーのいいね情報のみを抽出→更にitem_idのみを抽出
+        $userfavorites = Favorite::where('user_id', $user->id)->get()->pluck('item_id');
+        //抽出したIDに合致するItemレコードを取り出す
+        $favoriteitems = Item::find($userfavorites);
 
         $mylist = [
             'input' => $request->input('search'),
             'items' => $favoriteitems,
-            'param' => $request->tab
         ];
 
         return view('index', $mylist);
     }
+        else {
+        $data = [
+            'items' => null,
+            'input' => ''
+        ];
+            return view('index', $data);
+        }
 
+    }
+
+    public function purchase(Item $item)
+    {
+        $user = auth()->user();
+
+        $address = Profile::where('user_id', $user->id)->first();
+
+        $data = [
+            'item' => $item,
+            'profile' => $address
+        ];
+
+        return view('purchase', $data);
+
+    }
+
+    public function ajax(Request $request)
+    {
+        $ajax = $request->payment;
+
+        return response()->json([
+            'form' => view('purchase')->with(['payment_data' => $ajax])->render()
+        ]);
+    }
+
+    public function create(Request $request)
+    {
+        $user = auth()->user();
+
+        $Item = new Item();
+        $Item->user_id = $user->id;
+        $Item->name = $request->name;
+        $Item->brand = $request->brand;
+        $Item->description = $request->description;
+        $Item->price = $request->price;
+        $Item->condition = $request->condition;
+
+
+        $original = $request->file('image')->getClientOriginalName();
+        $name = date('Ymd_His') . '_' . $original;
+        $request->file('image')->move('storage/images', $name);
+
+        $Item->image = $name;
+
+        $Item->save();
+
+        $input = '';
+        $items = Item::all();
+
+        return redirect('/')->with('message', '出品しました');
+    }
 }

@@ -3,6 +3,8 @@
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\Controller;
 
 
 /*
@@ -16,16 +18,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::middleware('auth')->group(function(){
-    Route::get('/', [ItemController::class, 'index']);
+
     Route::post('/item/{item_id}/favorite', [ItemController::class, 'favorite']);
     Route::get('/sell', [ItemController::class, 'sell']);
-    Route::post('/', [ItemController::class, 'mylist']);
+    Route::post('/sell', [ItemController::class, 'create']);
+    Route::post('/mypage/profile', [ProfileController::class, 'store']);
     Route::get('/mypage/profile', [ProfileController::class, 'index']);
+    Route::post('/item/{item_id}/comments', [CommentController::class, 'store']);
+    Route::get('/purchase/{item}', [ItemController::class, 'purchase']);
+    Route::post('/purchase/{item}', [ProfileController::class, 'update']);
+    Route::get('/purchase/address/{item_id}', [ProfileController::class, 'changeAddress']);
 });
 
+Route::get('/', [ItemController::class, 'index']);
+Route::get('/login', [Controller::class, 'login'])->name('login');
 Route::get('/item/{item_id}', [ItemController::class,'detail']);
 
 Route::post('/item/find', [ItemController::class, 'search']);
+Route::post('/', [ItemController::class, 'mylist']);
 
 
 

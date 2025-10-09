@@ -54,8 +54,13 @@ class User extends Authenticatable
         return $this->hasMany(Favorite::class);
     }
 
-    public function mylist()
+    public function comments()
     {
-        return $this->hasManyThrough(Item::class, Favorite::class, 'user_id', 'item_id', null, 'item_id');
+        return $this->hasMany('App\Comment');
+    }
+
+    public function profile()
+    {
+        return $this->hasOne('App\Models\Profile');
     }
 }

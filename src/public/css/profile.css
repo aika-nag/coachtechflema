@@ -9,7 +9,37 @@
     font-weight: 700;
     text-align: center;
     margin: 0;
+    margin-bottom: 47px;
 }
+
+.icon {
+    display: flex;
+}
+
+.upload {
+    border: 2px solid #FF5555;
+    border-radius: 10px;
+    color: #FF5555;
+    font-size: 20px;
+    font-weight: bold;
+    width: 179px;
+    height: 49px;
+    text-align: center;
+    align-items: center;
+    display: grid;
+    margin-left: 40px;
+    margin-top: 51px;
+}
+.file_input {
+    display: none;
+}
+
+.icon_image {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
 
 .input_item {
     font-size: 24px;

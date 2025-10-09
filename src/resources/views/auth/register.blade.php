@@ -36,7 +36,6 @@
                 @error('password_confirmation')
                 <p class="error">{{ $errors -> first('password_confirmation') }}</p>
                 @enderror
-                <input type="hidden" name="profile" value="1">
             </div>
             <button class="register_button">登録する</button>
     </form>

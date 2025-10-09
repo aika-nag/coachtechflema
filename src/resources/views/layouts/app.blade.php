@@ -20,15 +20,14 @@
       @yield('input_bar')
     </div>
     <div class="nav">
-      @if(Auth::check())
       @yield('nav')
-      @endif
     </div>
   </header>
 
   <main>
     @yield('content')
   </main>
+  @yield('js')
 </body>
 
 </html>

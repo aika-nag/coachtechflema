@@ -51,7 +51,7 @@
     display: flex;
 }
 
-.function_favorite {
+.function_favorite, .function_comment {
     display: flex;
     flex-direction: column;
     margin-left: 45px;
@@ -72,6 +72,7 @@
 
 .count {
     font-size: 18px;
+    font-weight: bold;
     color: #FF5555;
     text-align: center;
 }
@@ -80,11 +81,18 @@
     width: 100%;
 }
 
-.uncount {
+.uncount, .count_comment {
     font-size: 18px;
     text-align: center;
+    font-weight: bold;
 }
 
+.comment_image {
+    width: 28px;
+    height: 28px;
+    margin-top: 5px;
+    margin-bottom: 6px;
+}
 .to_purchase {
     background-color: #FF5555;
     color: white;
@@ -133,4 +141,68 @@
     font-size: 20px;
 }
 
+.comment_title {
+    display: flex;
+    align-items: center;
+}
+
+.comment {
+    font-size: 36px;
+    color: #5F5F5F;
+    font-weight: bold;
+    height: 100px;
+    margin: 0;
+    padding: 32px 0;
+}
+
+.user_comment {
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+}
+
+.icon_name {
+    display: flex;
+    height: 70px;
+    margin-bottom: 19px;
+}
+
+.user_icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.user_name {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 20px auto 20px 18px;
+}
+
+.comment_detail {
+    background-color: #E5E5E5;
+    border-radius: 5px;
+    margin: 0 0 41px 0;
+    padding: 25px 15px;
+    font-size: 20px;
+}
+.item_comment {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.comment_content {
+    width: 570px;
+    height: 246px;
+}
+
+.comment_button {
+    background-color: #FF5555;
+    color: white;
+    font-size: 25px;
+    margin: 20px 0;
+    width: 570px;
+    border: #FF5555;
+    border-radius: 4px;
+}
 

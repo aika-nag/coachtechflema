@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Profile;
+use App\Models\Item;
 
 class ProfileController extends Controller
 {
@@ -17,21 +18,52 @@ class ProfileController extends Controller
 
     public function store(Request $request)
     {
-        $profile = new Profile();
-        $profile->name= $request->name;
-        $profile->zipcode= $request->zipcode;
-        $profile->address= $request->profile;
-        $profile->building= $request->building;
+        $user = auth()->user();
 
-        if(request('image')){
-            $original = request()->file('image')->getClientOriginalName();
+        $profile = new Profile();
+        $profile->user_id = $user->id;
+        $profile->name = $request->name;
+        $profile->zipcode = $request->zipcode;
+        $profile->address = $request->address;
+        $profile->building = $request->building;
+
+        if($request->hasFile('image')) {
+            $original = $request->image->getClientOriginalName();
             $name = date('Ymd_His').'_'.$original;
-            request()->file('image')->move('storage/images', $name);
-            $profile->image = $name;
+            $path = $request->file('image')->move('storage/images', $name);
+            $profile->image = $path;
         }
 
         $profile->save();
 
+        $input = '';
+        $items = Item::all();
+
+        return redirect('/');
+
+    }
+
+    public function changeAddress(Item $item)
+    {
+        $data = [
+            'item' => $item,
+        ];
+        return view('address', $data);
+    }
+
+    public function update(Request $request, Item $item)
+    {
+        $user = auth()->user;
+
+        $form = $request->all();
+        unset($form['token']);
+        Profile::where('user_id', $user->id)->first()->update($form);
+
+        $data = [
+            'item' => $item
+        ];
+
+        return redirect('/purchase/{{{ $item->id} }}}', compact('data'));
     }
 
 }
