@@ -5,21 +5,45 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Profile;
 use App\Models\Item;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Order;
+
+use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\AddressRequest;
 
 class ProfileController extends Controller
 {
     //
     public function index(Request $request)
     {
-        $profile = Profile::class;
+        $user = auth()->user();
+        $profile = Profile::where('user_id', $user->id)->first();
         $input = $request->input('search');
-        return view('profile', compact('input'));
+        return view('profile', compact('input', 'profile'));
     }
 
-    public function store(Request $request)
+    public function store(ProfileRequest $request)
     {
         $user = auth()->user();
+        $existingProfile = Profile::where('user_id', $user->id)->first();
+        if($existingProfile) {
 
+            if ($request->hasFile('image')) {
+                $original = $request->image->getClientOriginalName();
+                $name = date('Ymd_His') . '_' . $original;
+                $path = $request->file('image')->move('storage/images', $name);
+                Storage::disk('public')->delete('images/'. $existingProfile->image);
+                $existingProfile->update(['image' => $name ]);
+            }
+            $existingProfile->update([
+                'user_id' => $user->id,
+                'name' => $request->name,
+                'zipcode' => $request->zipcode,
+                'address' => $request->address,
+                'building' => $request->building
+            ]);
+            return redirect('/mypage');
+        } else {
         $profile = new Profile();
         $profile->user_id = $user->id;
         $profile->name = $request->name;
@@ -27,12 +51,12 @@ class ProfileController extends Controller
         $profile->address = $request->address;
         $profile->building = $request->building;
 
-        if($request->hasFile('image')) {
+          if($request->hasFile('image')) {
             $original = $request->image->getClientOriginalName();
             $name = date('Ymd_His').'_'.$original;
             $path = $request->file('image')->move('storage/images', $name);
-            $profile->image = $path;
-        }
+            $profile->image = $name;
+          }
 
         $profile->save();
 
@@ -40,30 +64,64 @@ class ProfileController extends Controller
         $items = Item::all();
 
         return redirect('/');
+        }
 
     }
 
-    public function changeAddress(Item $item)
+    public function editAddress($item_id)
     {
-        $data = [
-            'item' => $item,
+        $item = [
+            'item_id' => $item_id
         ];
-        return view('address', $data);
+
+        return view('address', $item);
     }
 
-    public function update(Request $request, Item $item)
+    public function changeAddress(AddressRequest $request, Item $item_id)
     {
-        $user = auth()->user;
-
-        $form = $request->all();
-        unset($form['token']);
-        Profile::where('user_id', $user->id)->first()->update($form);
+        $profile = array(
+            'zipcode' => $request->zipcode,
+            'address' => $request->address,
+            'building' => $request->building
+        );
 
         $data = [
-            'item' => $item
+            'item' => $item_id,
+            'profile' => $profile
         ];
 
-        return redirect('/purchase/{{{ $item->id} }}}', compact('data'));
+        return view('purchase',$data);
+    }
+
+    public function mypage(Request $request)
+    {
+        $user = auth()->user();
+        $profile = Profile::where('user_id', $user->id)->first();
+        $input = $request->input('search');
+
+        $items = Item::where('user_id', $user->id)->get();
+
+        return view('mypage', compact('profile', 'input', 'items'));
+    }
+
+    public function sell_buy(Request $request)
+    {
+        $user = auth()->user();
+        $profile = Profile::where('user_id', $user->id)->first();
+        $input = $request->input('search');
+        $param = $request->page;
+
+        if ($param == "sell") {
+            $items = Item::where('user_id', $user->id)->get();
+
+            return view('mypage', compact('profile', 'input', 'items'));
+        }
+        else {
+            $buy_items = Order::where('user_id', $user->id)->get()->pluck('item_id');
+            $items = Item::find($buy_items);
+
+            return view('mypage', compact('profile', 'input', 'items'));
+        }
     }
 
 }

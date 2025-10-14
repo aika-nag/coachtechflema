@@ -16,7 +16,7 @@
   @csrf
   <button class="logout_button">ログアウト</button>
 </form>
-<form action="" class="mypage">
+<form action="/mypage" class="mypage">
   <button class="mypage_button">マイページ</button>
 </form>
 <form action="/sell" class="sell" method="get">
@@ -42,7 +42,7 @@
       <p class="category_tag">カテゴリー</p>
       <div class="category_flex">
         @foreach ($categories as $category)
-          <label class="tag"><input type="checkbox" class="tag_name" name="category" value="{{ $category['id'] }}">{{ $category['name']}}</label>
+          <label class="tag"><input type="checkbox" class="tag_name" name="category[]" value="{{ $category['id'] }}">{{ $category['name']}}</label>
         @endforeach
       </div>
     </div>

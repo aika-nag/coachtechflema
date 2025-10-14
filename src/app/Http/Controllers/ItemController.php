@@ -11,6 +11,8 @@ use App\Models\Comment;
 use App\Models\Favorite;
 use App\Models\User;
 use App\Models\Profile;
+use App\Models\Category_item;
+use App\Models\Order;
 
 class ItemController extends Controller
 {
@@ -144,9 +146,45 @@ class ItemController extends Controller
 
         $Item->save();
 
+        $categories = $request->category;
+
+        foreach($categories as $category)
+        {
+            $category_item = new Category_item();
+            $category_item->item_id = $Item->id;
+            $category_item->category_id = $category;
+
+            $category_item->save();
+        }
+
         $input = '';
         $items = Item::all();
 
         return redirect('/')->with('message', '出品しました');
+    }
+
+    public function sell_index()
+    {
+        $user = auth()->user();
+        $items = Item::where('user_id', $user->id)->get();
+
+        return view('mypage', compact('items'));
+    }
+
+    public function order(Request $request, Item $item_id)
+    {
+        $user = auth()->user();
+
+        $Order = new Order();
+        $Order->user_id = $user->id;
+        $Order->item_id = $item_id->id;
+        $Order->payment = $request->hidden_payment;
+        $Order->delivery_zipcode = $request->hidden_zipcode;
+        $Order->delivery_address = $request->hidden_address;
+        $Order->delivery_building = $request->hidden_building;
+
+        $Order->save();
+        
+        return redirect('/');
     }
 }

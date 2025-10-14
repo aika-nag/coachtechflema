@@ -17,10 +17,10 @@
   @csrf
   <button class="logout_button">ログアウト</button>
 </form>
-<form action="" class="mypage">
+<form action="/mypage" class="mypage">
   <button class="mypage_button">マイページ</button>
 </form>
-<form action="" class="sell">
+<form action="/sell" class="sell">
   <button class="sell_button">出品</button>
 </form>
 @else
@@ -39,7 +39,7 @@
 @section('content')
 <div class="content">
   <div class="item_image">
-    <img src="{{ asset('images' . $item->image) }}" alt="{{ $item->name }}" class="image">
+    <img src="{{ asset('storage/images/' . $item->image) }}" alt="{{ $item->name }}" class="image">
   </div>
   <div class="detail">
     <p class="item_name">{{ $item->name }}</p>
@@ -114,7 +114,11 @@
       @foreach ($comments as $comment)
       <div class="user_comment">
         <div class="icon_name">
-          <img src="{{ asset('images/default_icon.png')}}" alt="" class="user_icon">
+          @if($comment['user']['profile']['image'] != null)
+            <img src="{{ asset('storage/images/'.$comment['user']['profile']['image']) }}" alt="アイコン画像" class="user_icon" id="preview">
+          @else
+            <img src="{{ asset('images/default_icon.png')}}" alt="" class="user_icon">
+          @endif
           <span class="user_name">{{ $comment['user']['profile']['name'] }}</span>
         </div>
         <p class="comment_detail">{{ $comment['content'] }}</p>
@@ -122,6 +126,9 @@
       @endforeach
         <p class="item_comment">商品へのコメント</p>
         <textarea name="content" class="comment_content"></textarea>
+        @error('content')
+        <p class="error">{{ $message }}</p>
+        @enderror
         <button class="comment_button">コメントを送信する</button>
     </form>
   </div>

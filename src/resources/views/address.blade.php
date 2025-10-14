@@ -26,7 +26,7 @@
 
 @section('content')
   <div class="content">
-    <form action="/purchase/{{{ $item->id }}}" class="profile__form" method="post">
+    <form action="/purchase/address/{{{ $item_id }}}" class="profile__form" method="post">
         @csrf
         <p class="title">住所の変更</p>
         <div class="input">

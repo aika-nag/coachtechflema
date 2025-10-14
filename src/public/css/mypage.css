@@ -1,0 +1,84 @@
+.user_profile {
+    display: flex;
+    height: 305px;
+}
+
+.icon {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 78px 57px 0 299px;
+}
+
+.name {
+    font-size: 36px;
+    font-weight: bold;
+    width: 250px;
+    margin: 121px 250px 0 0;
+}
+
+.edit_profile {
+    border: 2px solid #FF5555;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    color: #FF5555;
+    width: 310px;
+    height: 59px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    margin: 124px 0 0 0;
+}
+
+.title {
+    display: flex;
+    gap: 52px;
+    border-bottom: 2px solid #5F5F5F;
+}
+
+.sell_item {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FF0000;
+    border: none;
+    margin-left: 129px;
+    background-color: #FFFFFF;
+    width: 155px;
+    padding: 0;
+}
+
+.buy_item {
+    font-size: 24px;
+    font-weight: bold;
+    color: #5F5F5F;
+    border: none;
+    background-color: #FFFFFF;
+    width: 155px;
+    padding: 0;
+}
+
+.buy_link {
+    font-size: 24px;
+    font-weight: bold;
+    color: #5F5F5F;
+    text-decoration: none;
+    margin: 0;
+}
+
+.items {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 290px;
+    gap: 75px;
+    width: 1375px;
+    margin: 75px auto;
+}
+
+.image {
+    max-width: 100%;
+    height: 100%;
+}
+
+.item_name {
+    margin-top: 10px;
+}

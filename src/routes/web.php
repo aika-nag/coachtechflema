@@ -22,12 +22,15 @@ Route::middleware('auth')->group(function(){
     Route::post('/item/{item_id}/favorite', [ItemController::class, 'favorite']);
     Route::get('/sell', [ItemController::class, 'sell']);
     Route::post('/sell', [ItemController::class, 'create']);
+    Route::get('/mypage', [ProfileController::class, 'mypage']);
+    Route::post('/mypage', [ProfileController::class, 'sell_buy']);
     Route::post('/mypage/profile', [ProfileController::class, 'store']);
     Route::get('/mypage/profile', [ProfileController::class, 'index']);
     Route::post('/item/{item_id}/comments', [CommentController::class, 'store']);
     Route::get('/purchase/{item}', [ItemController::class, 'purchase']);
-    Route::post('/purchase/{item}', [ProfileController::class, 'update']);
-    Route::get('/purchase/address/{item_id}', [ProfileController::class, 'changeAddress']);
+    Route::post('/purchase/address/{item_id}', [ProfileController::class, 'changeAddress']);
+    Route::get('/purchase/address/{item_id}', [ProfileController::class, 'editAddress']);
+    Route::post('/purchase/{item_id}', [ItemController::class, 'order']);
 });
 
 Route::get('/', [ItemController::class, 'index']);
