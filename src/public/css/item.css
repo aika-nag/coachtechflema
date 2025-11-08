@@ -5,9 +5,34 @@
     margin: 95px auto 50px;
 }
 
-.item_image {
+.item_img {
     width: 50%;
     padding: 36px 45px;
+    position: relative;
+}
+
+.sold {
+    width: 0;
+    height: 0;
+    border-left: 80px solid transparent;
+    border-right: 80px solid transparent;
+    border-bottom: 80px solid #FF0000;
+    transform: rotate(-45deg);
+    position: absolute;
+    top: 24px;
+    left: -6px;
+}
+
+.character {
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 22px;
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    position: absolute;
+    top: 55px;
+    left: -70px;
+    float: left;
 }
 
 .image {
@@ -93,6 +118,17 @@
     margin-top: 5px;
     margin-bottom: 6px;
 }
+
+.not_purchase {
+    background-color: #E5E5E5;
+    color: #FFFFFF;
+    font-size: 30px;
+    margin: 20px 0;
+    width: 570px;
+    border: #E5E5E5;
+    border-radius: 4px;
+}
+
 .to_purchase {
     background-color: #FF5555;
     color: white;
@@ -194,6 +230,16 @@
 .comment_content {
     width: 570px;
     height: 246px;
+}
+
+.not_comment_button {
+    background-color: #E5E5E5;
+    color: white;
+    font-size: 25px;
+    margin: 20px 0;
+    width: 570px;
+    border: #E5E5E5;
+    border-radius: 4px;
 }
 
 .comment_button {

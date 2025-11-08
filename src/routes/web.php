@@ -5,6 +5,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 
 
 /*
@@ -17,8 +19,7 @@ use App\Http\Controllers\Controller;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::middleware('auth')->group(function(){
-
+Route::middleware(['auth', 'verified'])->group(function(){
     Route::post('/item/{item_id}/favorite', [ItemController::class, 'favorite']);
     Route::get('/sell', [ItemController::class, 'sell']);
     Route::post('/sell', [ItemController::class, 'create']);

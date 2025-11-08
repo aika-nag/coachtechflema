@@ -38,7 +38,12 @@
 
 @section('content')
 <div class="content">
-  <div class="item_image">
+  <div class="item_img">
+    @if($item->order != null )
+    <div class="sold">
+      <span class="character">Sold</span>
+    </div>
+    @endif
     <img src="{{ asset('storage/images/' . $item->image) }}" alt="{{ $item->name }}" class="image">
   </div>
   <div class="detail">
@@ -53,13 +58,13 @@
           <div class="function_favorite">
             <button type="submit" class="favorite_star">
             <img src="../../../images/favorite.png" alt="いいね" class="star_image"></button>
-             <span class="count">{{ $item->favorites->count() }}</span>
+            <span class="count">{{ $item->favorites->count() }}</span>
           </div>
           @else
           <div class="function_favorite">
             <button type="submit" class="unfavorite_star"><img src="../../../images/favorite.png" alt="いいね取り消し" class="star_image"></button>
             <span class="uncount">{{ $item->favorites->count() }}</span>
-           </div>
+          </div>
           @endif
         @else
         <div class="function_favorite">
@@ -74,7 +79,11 @@
       </div>
     </div>
     <form action="/purchase/{{{$item->id}}}" method="get">
-      <button class="to_purchase">購入手続きへ</button>
+    @if($item->order != null)
+    <button class="not_purchase" disabled>購入手続きへ</button>
+    @else
+    <button class="to_purchase">購入手続きへ</button>
+    @endif
     </form>
     <p class="item_description">商品説明</p>
     <p class="text">{{ $item->description }}</p>
@@ -115,21 +124,25 @@
       <div class="user_comment">
         <div class="icon_name">
           @if($comment['user']['profile']['image'] != null)
-            <img src="{{ asset('storage/images/'.$comment['user']['profile']['image']) }}" alt="アイコン画像" class="user_icon" id="preview">
+          <img src="{{ asset('storage/images/'.$comment['user']['profile']['image']) }}" alt="アイコン画像" class="user_icon" id="preview">
           @else
-            <img src="{{ asset('images/default_icon.png')}}" alt="" class="user_icon">
+          <img src="{{ asset('images/default_icon.png')}}" alt="" class="user_icon">
           @endif
           <span class="user_name">{{ $comment['user']['profile']['name'] }}</span>
         </div>
         <p class="comment_detail">{{ $comment['content'] }}</p>
       </div>
       @endforeach
-        <p class="item_comment">商品へのコメント</p>
-        <textarea name="content" class="comment_content"></textarea>
-        @error('content')
-        <p class="error">{{ $message }}</p>
-        @enderror
+      <p class="item_comment">商品へのコメント</p>
+      <textarea name="content" class="comment_content"></textarea>
+      @error('content')
+      <p class="error">{{ $message }}</p>
+      @enderror
+        @if($item->order != null)
+        <button class="not_comment_button" disabled>コメントを送信する</button>
+        @else
         <button class="comment_button">コメントを送信する</button>
+        @endif
     </form>
   </div>
 </div>

@@ -13,7 +13,7 @@ class PurchaseRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,6 +25,18 @@ class PurchaseRequest extends FormRequest
     {
         return [
             //
+            'payment' => 'required',
+            'zipcode' => 'required',
+            'address' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'payment.required' => 'お支払い方法を選択してください',
+            'zipcode.required' => '配送先郵便番号を入力してください',
+            'address.required' => '配送先住所を入力してください'
         ];
     }
 }

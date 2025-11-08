@@ -5,7 +5,7 @@
 @endsection
 
 @section('input_bar')
-<form action="/item/find" method="post">
+<form action="/item/find" method="post" class="search_form">
   @csrf
   <input type="text" class="search" name="search" placeholder="なにをお探しですか？" value="{{ $input }}">
 </form>
@@ -37,27 +37,36 @@
 @endsection
 
 @section('content')
-<div class="content">
-  <div class="title">
-    <a href="/" class="recommend_link"><p class="@if(Auth::check()) login_recommend @else recommend @endif">おすすめ</p></a>
-    <form action="/?tab=mylist" method="post">
-      @csrf
-      <button class="@if(Auth::check()) login_mylist @else mylist @endif">マイリスト</button>
-    </form>
-  </div>
-  <div class="items">
-    @if($items != null)
-      @foreach ($items as $item)
-       <div class="item_img">
-       <a href="/item/{{{ $item ->id }}}"><img src="{{ asset('storage/images/' . $item -> image) }}" alt="{{ $item -> name }}" class="image"></a>
-       <p class="item_name">{{ $item -> name }}</p>
-       </div>
-      @endforeach
-    @else
-    <div></div>
-    @endif
-  </div>
+<div class="title">
+  <a href="/" class="recommend_link"><p class="@if(Auth::check()) login_recommend @else recommend @endif">おすすめ</p></a>
+  <form action="/?tab=mylist" method="post">
+  @csrf
+    <button class="@if(Auth::check()) login_mylist @else mylist @endif">マイリスト</button>
+  </form>
 </div>
+<div class="items">
+  @if($items != null)
+  @foreach ($items as $item)
+  <div class="item">
+    @if($item->order != null )
+    <div class="sold">
+      <span class="character">Sold</span>
+    </div>
+    @endif
+    <a href="/item/{{{ $item ->id }}}">
+      <img src="{{ asset('storage/images/' . $item -> image) }}" alt="{{ $item -> name }}" class="image">
+    </a>
+    <p class="item_name">{{ $item -> name }}</p>
+  </div>
+  @endforeach
+  @else
+  <div></div>
+  @endif
+</div>
+@endsection
+
+@section('js')
+<script src="{{ asset('js/index.js') }}"></script>
 @endsection
 
 

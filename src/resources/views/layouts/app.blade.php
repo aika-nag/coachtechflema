@@ -13,21 +13,27 @@
 
 <body>
   <header class="header">
-    <div class="logo">
-      <a href="/"><img src="../../../../images/logo.svg" alt="coachtechロゴ" class="logo__image"></a>
-    </div>
-    <div class=input_bar>
-      @yield('input_bar')
-    </div>
-    <div class="nav">
-      @yield('nav')
+    <div class="header_inner">
+        <a href="/" class="logo">
+            <img src="../../../../images/logo.svg" alt="coachtechロゴ" class="logo_image">
+        </a>
+        <button class="toggle-menu-button" id="toggle-menu-button"></button>
+        <div class="header-site-menu" id="header-site-menu">
+            <div class=input_bar>
+            @yield('input_bar')
+            </div>
+            <div class="nav">
+            @yield('nav')
+            </div>
+        </div>
     </div>
   </header>
 
   <main>
-    @yield('content')
+  @yield('content')
   </main>
   @yield('js')
+  <script src="{{ asset('js/index.js') }}"></script>
 </body>
 
 </html>

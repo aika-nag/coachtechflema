@@ -14,6 +14,8 @@ use App\Models\Profile;
 use App\Models\Category_item;
 use App\Models\Order;
 
+use App\Http\Requests\PurchaseRequest;
+
 class ItemController extends Controller
 {
     //
@@ -171,7 +173,7 @@ class ItemController extends Controller
         return view('mypage', compact('items'));
     }
 
-    public function order(Request $request, Item $item_id)
+    public function order(PurchaseRequest $request, Item $item_id)
     {
         $user = auth()->user();
 
@@ -184,7 +186,7 @@ class ItemController extends Controller
         $Order->delivery_building = $request->hidden_building;
 
         $Order->save();
-        
+
         return redirect('/');
     }
 }

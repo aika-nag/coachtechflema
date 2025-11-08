@@ -17,6 +17,13 @@
     margin: 121px 250px 0 0;
 }
 
+.no_name {
+    font-size: 20px;
+    font-weight: bold;
+    width: 300px;
+    margin: 121px 200px 0 0;
+}
+
 .edit_profile {
     border: 2px solid #FF5555;
     border-radius: 10px;
@@ -81,4 +88,31 @@
 
 .item_name {
     margin-top: 10px;
+}
+
+.item_img {
+    position: relative;
+}
+
+.sold {
+    width: 0;
+    height: 0;
+    border-left: 60px solid transparent;
+    border-right: 60px solid transparent;
+    border-bottom: 60px solid #FF0000;
+    transform: rotate(-45deg);
+    position: absolute;
+    top: -9px;
+    left: -39px;
+}
+
+.character {
+    color: #FFFFFF;
+    font-weight: bold;
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    position: absolute;
+    top: 42px;
+    left: -47px;
+    float: left;
 }

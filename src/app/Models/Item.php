@@ -28,6 +28,11 @@ class Item extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function order()
+    {
+        return $this->hasOne(Order::class);
+    }
+
     protected $fillable = [
         'name',
         'brand',

@@ -1,0 +1,30 @@
+.content {
+    max-width: 720px;
+    margin: 237px auto;
+    text-align: center;
+}
+
+.verify_email {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 237px;
+    margin-bottom: 62px;
+}
+
+.verify_button {
+    width: 257px;
+    height: 69px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid #D9D9D9;
+}
+
+.resend_button {
+    font-size: 20px;
+    color: #0073CC;
+    background-color: #FFFFFF;
+    border: none;
+    margin-top: 52px;
+}
