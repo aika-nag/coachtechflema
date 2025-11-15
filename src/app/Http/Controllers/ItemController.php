@@ -180,7 +180,7 @@ class ItemController extends Controller
         $Order = new Order();
         $Order->user_id = $user->id;
         $Order->item_id = $item_id->id;
-        $Order->payment = $request->hidden_payment;
+        $Order->payment = $request->payment;
         $Order->delivery_zipcode = $request->hidden_zipcode;
         $Order->delivery_address = $request->hidden_address;
         $Order->delivery_building = $request->hidden_building;

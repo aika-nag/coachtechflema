@@ -37,7 +37,7 @@
    <img src="{{ asset('images/default_icon.png') }}" alt="アイコン画像を登録できます" class="icon">
    <p class="no_name">右のボタンを押して<br />プロフィールを設定してください</p>
   @endif
-  <form action="/mypage/profile">
+  <form action="/mypage/profile" class="edit_form">
     <button class="edit_profile">プロフィールを編集</button>
   </form>
 </div>
@@ -54,15 +54,15 @@
 <div class="items">
   @if(isset($items))
     @foreach ($items as $item)
-    <div class="item_img">
-    @if($item->order != null )
-    <div class="sold">
-      <span class="character">Sold</span>
-    </div>
-    @endif
+    <div class="item">
+      @if($item->order != null )
+      <div class="sold">
+        <span class="character">Sold</span>
+      </div>
+      @endif
       <a href="/item/{{{ $item ->id }}}"><img src="{{ asset('storage/images/' . $item -> image) }}" alt="{{ $item -> name }}" class="image"></a>
       <p class="item_name">{{ $item -> name }}</p>
-      </div>
+    </div>
     @endforeach
   @else
   <div></div>

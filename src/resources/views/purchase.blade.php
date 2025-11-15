@@ -41,6 +41,9 @@
         <option value="1">コンビニ払い</option>
         <option value="2">カード払い</option>
       </select>
+      @foreach ($errors->all() as $error)
+      <li>{{$error}}</li>
+      @endforeach
       @error('payment')
       <p class="error">{{ $message }}</p>
       @enderror
@@ -48,17 +51,17 @@
     <div class="shipping">
       <div class="shipping_address">
         <p class="address">配送先</p>
-    <form action="/purchase/address/{{{ $item->id }}}" class="change" method="get">
+      <form action="/purchase/address/{{{ $item->id }}}" class="change" method="get">
       <button class="change_address">変更する</button>
-    </form>
-  </div>
-    <div class="profile">
-      <input type="hidden" class="zipcode" id="zipcode" value="{{ $profile['zipcode'] }}">{{ $profile['zipcode'] }}<br />
-      <input type="hidden" class="profile_address" id="address" value="{{ $profile['address']}}">{{ $profile['address']}}
-      <input type="hidden" class="profile_address" id="building" value="{{ $profile['building'] }}">{{ $profile['building'] }}
+      </form>
+      </div>
+      <div class="profile">
+      <p class="zipcode" id="zipcode" >{{ $profile['zipcode'] }}</p>
+      <p class="profile_address" id="address">{{ $profile['address']}}</p>
+      <p class="profile_address" id="building">{{ $profile['building'] }}</p>
+      </div>
     </div>
   </div>
-</div>
   <div class="confirm">
     <table class="payment_detail">
       <tr>
@@ -73,10 +76,10 @@
     <form action="/purchase/{{{ $item->id }}}" method="post">
       @csrf
       <button class="purchase_button">購入する</button>
-          <input type="hidden" id="hidden_select" value="" name="hidden_payment">
-          <input type="hidden" id="hidden_zipcode" name="hidden_zipcode" value="">
-          <input type="hidden" id="hidden_address" name="hidden_address" value="">
-          <input type="hidden" id="hidden_building" name="hidden_building"  value="">
+          <input type="hidden" id="hidden_select" value="" name="payment">
+          <input type="hidden" id="hidden_zipcode" name="hidden_zipcode" value="" name="zipcode">
+          <input type="hidden" id="hidden_address" name="hidden_address" value="" name="address">
+          <input type="hidden" id="hidden_building" name="hidden_building"  value="" name="building">
     </form>
   </div>
 </div>

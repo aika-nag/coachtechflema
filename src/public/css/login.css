@@ -1,3 +1,7 @@
+.nav {
+    display: none;
+}
+
 .content {
     width: 680px;
     height: 656px;
@@ -19,7 +23,7 @@
     margin: 50px 0 0 0;
 }
 
-.input input {
+.input_email, .input_pwd {
     width: 100%;
     height: 57.09px;
     border: 1px solid #5F5F5F;
@@ -45,4 +49,13 @@
     color: #0073CC;
     border: none;
     margin-top: 18px;
+}
+
+@media(max-width: 819px) {
+
+    .content {
+        width: auto;
+        padding: 0 30px;
+    }
+
 }

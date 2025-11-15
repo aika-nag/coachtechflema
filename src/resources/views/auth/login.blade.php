@@ -9,16 +9,16 @@
     <p class="title">ログイン</p>
     <form action="/login" class="login__form" method="post" novalidate>
       @csrf
-      <div class="input">
+      <div>
         <label class="login_item" for="email">メールアドレス</label>
-        <input type="email" name="email" id="email">
+        <input type="email" name="email" id="email" class="input_email">
         @error('email')
         <p class="error">{{ $message }}</p>
         @enderror
       </div>
-      <div class="input">
+      <div>
         <label class="login_item" for="password">パスワード</label>
-        <input type="password" name="password" id="password">
+        <input type="password" name="password" id="password" class="input_pwd">
         @error('password')
         <p class="error">{{ $message }}</p>
         @enderror

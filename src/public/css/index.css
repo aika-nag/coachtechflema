@@ -17,6 +17,7 @@
     padding-left: 40px;
     color: #5F5F5F;
 }
+
 .recommend {
     margin: auto 0 0 127px;
     width: 155px;
@@ -102,29 +103,21 @@
     margin-bottom: 0;
 }
 
-@media(max-width:1300px) {
+@media(max-width:1299px) {
 
     .search::placeholder {
-        font-size: 16px;
+        font-size: 14px;
     }
 }
 
-@media(max-width:1130px){
+@media(max-width:1129px) {
 
     .search::placeholder {
-        font-size: 10px;
+        font-size: 8px;
     }
-
-    .items {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        grid-template-rows: 1fr 1fr 1fr;
-        gap: 50px;
-        }
-
-
 }
-@media(max-width: 768px) {
+
+@media(max-width:1040px) {
 
     .logo {
         width: 50%;
@@ -138,7 +131,7 @@
         top: 0;
         right: -100%;
         width: 50vw;
-        height: 25%;
+        height: 30%;
         transition: right 0.3s ease;
         z-index: 10;
     }
@@ -215,6 +208,16 @@
 
     .items {
         display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-rows: 1fr 1fr 1fr;
+        gap: 50px;
+    }
+}
+
+@media(max-width: 768px) {
+
+    .items {
+        display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 20px;
         box-sizing: border-box;
@@ -232,6 +235,46 @@
         height: auto;
         display: block;
     }
+}
+
+@media(max-width: 500px) {
+
+    .login_recommend {
+        margin: auto 0 0 40px;
+        width: auto;
+        padding-left: 40px;
+        color: #5F5F5F;
+    }
+
+    .recommend {
+        margin: auto 0 0 40px;
+        width: auto;
+        padding-left: 40px;
+        color: #FF0000;
+    }
+
+    .login_mylist {
+        border: none;
+        background-color: #FFFFFf;
+        margin: auto 0 0 30px;
+        width: auto;
+        padding-right: 0;
+        color: #FF0000;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .mylist {
+        border: none;
+        background-color: #FFFFFf;
+        margin: auto 0 0 30px;
+        width: auto;
+        padding-right: 0;
+        color: #5F5F5F;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
 }
 
 

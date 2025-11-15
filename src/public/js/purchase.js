@@ -9,9 +9,9 @@ let hiddenZipcode = document.getElementById("hidden_zipcode");
 let hiddenAddress = document.getElementById("hidden_address");
 let hiddenBuilding = document.getElementById("hidden_building");
 
-hiddenZipcode.value = zipcode.value;
-hiddenAddress.value = address.value;
-hiddenBuilding.value = building.value;
+hiddenZipcode.value = zipcode.textContent;
+hiddenAddress.value = address.textContent;
+hiddenBuilding.value = building.textContent;
 
 select.addEventListener('change', function () {
     let method_info = document.getElementById("method_info");
