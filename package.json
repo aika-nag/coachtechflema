@@ -1,0 +1,19 @@
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "prettier": "prettier",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@prettier/plugin-php": "^0.24.0",
+    "lint-staged": "^16.2.6",
+    "prettier": "^3.6.2"
+  },
+  "dependencies": {
+    "husky": "^9.1.7"
+  },
+  "lint-staged": {
+    "my_test.php": "prettier --write"
+  }
+}

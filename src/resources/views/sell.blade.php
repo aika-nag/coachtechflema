@@ -33,6 +33,7 @@
     <div class="image">
       <p class="item_title">商品画像</p>
       <div class="image_area">
+        <img class="icon_image" id="preview" src="{{  asset('') }}" alt="商品画像">
         <label for="sell_image" class="upload">画像を選択する</label>
         <input type="file" id="sell_image" name="image" class="file_input">
       </div>
@@ -69,3 +70,9 @@
   </form>
 </div>
 @endsection
+
+
+@section('js')
+<script src="{{ asset('js/sell.js') }}"></script>
+@endsection
+
