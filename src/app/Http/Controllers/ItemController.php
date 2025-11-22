@@ -10,11 +10,9 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Favorite;
 use App\Models\User;
-use App\Models\Profile;
 use App\Models\Category_item;
-use App\Models\Order;
+use App\Http\Requests\ExhibitionRequest;
 
-use App\Http\Requests\PurchaseRequest;
 
 class ItemController extends Controller
 {
@@ -22,7 +20,8 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $input = '';
-        $items = Item::all();
+        $user = auth()->user();
+        $items = Item::where('user_id', '!=', $user->id)->get();
         return view('index', compact('input','items'));
     }
 
@@ -103,31 +102,7 @@ class ItemController extends Controller
 
     }
 
-    public function purchase(Item $item)
-    {
-        $user = auth()->user();
-
-        $address = Profile::where('user_id', $user->id)->first();
-
-        $data = [
-            'item' => $item,
-            'profile' => $address
-        ];
-
-        return view('purchase', $data);
-
-    }
-
-    public function ajax(Request $request)
-    {
-        $ajax = $request->payment;
-
-        return response()->json([
-            'form' => view('purchase')->with(['payment_data' => $ajax])->render()
-        ]);
-    }
-
-    public function create(Request $request)
+    public function create(ExhibitionRequest $request)
     {
         $user = auth()->user();
 
@@ -171,22 +146,5 @@ class ItemController extends Controller
         $items = Item::where('user_id', $user->id)->get();
 
         return view('mypage', compact('items'));
-    }
-
-    public function order(PurchaseRequest $request, Item $item_id)
-    {
-        $user = auth()->user();
-
-        $Order = new Order();
-        $Order->user_id = $user->id;
-        $Order->item_id = $item_id->id;
-        $Order->payment = $request->payment;
-        $Order->delivery_zipcode = $request->hidden_zipcode;
-        $Order->delivery_address = $request->hidden_address;
-        $Order->delivery_building = $request->hidden_building;
-
-        $Order->save();
-
-        return redirect('/');
     }
 }

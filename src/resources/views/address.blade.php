@@ -26,8 +26,7 @@
 
 @section('content')
 <div class="content">
-  <form action="/purchase/address/{{{ $item_id }}}" class="profile__form" method="post">
-    @csrf
+  <form action="/purchase/deliveryaddress/{{{ $item->id }}}" class="profile__form" method="get">
     <p class="title">住所の変更</p>
     <div class="input">
     <label class="input_item" for="zipcode">郵便番号</label>
@@ -50,6 +49,7 @@
       <p class="error">{{ $errors -> first('building') }}</p>
       @enderror
     </div>
+    <input type="hidden" name="payment" value="{{ $payment}}">
       <button class="change_address_button">更新する</button>
   </form>
 </div>

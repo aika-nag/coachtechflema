@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Order;
 
 use App\Http\Requests\ProfileRequest;
-use App\Http\Requests\AddressRequest;
 
 class ProfileController extends Controller
 {
@@ -68,31 +67,6 @@ class ProfileController extends Controller
 
     }
 
-    public function editAddress($item_id)
-    {
-        $item = [
-            'item_id' => $item_id
-        ];
-
-        return view('address', $item);
-    }
-
-    public function changeAddress(AddressRequest $request, Item $item_id)
-    {
-        $profile = array(
-            'zipcode' => $request->zipcode,
-            'address' => $request->address,
-            'building' => $request->building
-        );
-
-        $data = [
-            'item' => $item_id,
-            'profile' => $profile
-        ];
-
-        return view('purchase',$data);
-    }
-
     public function mypage(Request $request)
     {
         $user = auth()->user();
@@ -117,7 +91,7 @@ class ProfileController extends Controller
             return view('mypage', compact('profile', 'input', 'items'));
         }
         else {
-            $buy_items = Order::where('user_id', $user->id)->get()->pluck('item_id');
+            $buy_items = Order::where('buyer_id', $user->id)->get()->pluck('item_id');
             $items = Item::find($buy_items);
 
             return view('mypage', compact('profile', 'input', 'items'));

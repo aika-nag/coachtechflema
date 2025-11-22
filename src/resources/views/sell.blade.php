@@ -37,15 +37,21 @@
         <label for="sell_image" class="upload">画像を選択する</label>
         <input type="file" id="sell_image" name="image" class="file_input">
       </div>
+      @error('image')
+      <p class="error">{{ $message }}</p>
+      @enderror
     </div>
     <div class="category">
       <p class="sell_title">商品の詳細</p>
       <p class="category_tag">カテゴリー</p>
       <div class="category_flex">
         @foreach ($categories as $category)
-          <label class="tag"><input type="checkbox" class="tag_name" name="category[]" value="{{ $category['id'] }}">{{ $category['name']}}</label>
+          <label class="tag"><input type="checkbox" class="tag_name" name="category" value="{{ $category['id'] }}">{{ $category['name']}}</label>
         @endforeach
       </div>
+      @error('category')
+      <p class="error">{{ $message }}</p>
+      @enderror
     </div>
     <div class="condition">
       <label class="item_title" for="item_condition">商品の状態</label>
@@ -56,16 +62,28 @@
         <option value="3">やや傷や汚れあり</option>
         <option value="4">状態が悪い</option>
       </select>
+      @error('condition')
+      <p class="error">{{ $message }}</p>
+      @enderror
     </div>
     <p class="sell_title">商品名と説明</p>
     <label class="item_title" for="name">商品名</label>
     <input type="text" id="name" name="name" class="input_area">
+    @error('name')
+    <p class="error">{{ $message }}</p>
+    @enderror
     <label class="item_title" for="brand">ブランド名</label>
     <input type="text" id="brand" name="brand" class="input_area">
     <label class="item_title" for="description">商品の説明</label>
     <textarea name="description" id="description" class="description"></textarea>
+    @error('description')
+    <p class="error">{{ $message }}</p>
+    @enderror
     <label class="item_title" for="price">販売価格</label>
     <input type="text" id="price" name="price" class="input_area">
+    @error('price')
+    <p class="error">{{ $message }}</p>
+    @enderror
     <button class="sell_item_button">出品する</button>
   </form>
 </div>

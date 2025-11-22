@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\OrderController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
@@ -28,10 +29,10 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::post('/mypage/profile', [ProfileController::class, 'store']);
     Route::get('/mypage/profile', [ProfileController::class, 'index']);
     Route::post('/item/{item_id}/comments', [CommentController::class, 'store']);
-    Route::get('/purchase/{item}', [ItemController::class, 'purchase']);
-    Route::post('/purchase/address/{item_id}', [ProfileController::class, 'changeAddress']);
-    Route::get('/purchase/address/{item_id}', [ProfileController::class, 'editAddress']);
-    Route::post('/purchase/{item_id}', [ItemController::class, 'order']);
+    Route::get('/purchase/{item}', [OrderController::class, 'purchase']);
+    Route::post('/purchase/{item_id}', [OrderController::class, 'order']);
+    Route::get('/purchase/deliveryaddress/{item_id}', [OrderController::class, 'changeAddress']);
+    Route::get('/purchase/address/{item_id}', [OrderController::class, 'editAddress']);
 });
 
 Route::get('/', [ItemController::class, 'index']);
