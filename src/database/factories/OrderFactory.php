@@ -15,15 +15,11 @@ class OrderFactory extends Factory
      */
     public function definition()
     {
-        $seller = User::factory()->create();
         $buyer = User::factory()->create();
-        $item =Item::factory()->create([
-                'user_id' => $seller->id
-            ]);
+        $item =Item::factory()->create();
 
         return [
             'buyer_id' => $buyer->id,
-            'seller_id' => $seller->id,
             'item_id' => $item->id,
             'payment' => $this->faker->numberBetween(1,2),
             'delivery_zipcode' => $this->faker->numerify('###-####'),

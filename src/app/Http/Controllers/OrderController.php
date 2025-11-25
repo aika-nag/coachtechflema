@@ -60,7 +60,6 @@ class OrderController extends Controller
 
         $Order = new Order();
         $Order->buyer_id = $user->id;
-        $Order->seller_id = $item_id->user_id;
         $Order->item_id = $item_id->id;
         $Order->payment = $request->payment;
         $Order->delivery_zipcode = $request->zipcode;
