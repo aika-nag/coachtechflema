@@ -25,7 +25,7 @@
 - mailhog1.0.1
 
 ## ER図
-![ER図](src/flema.drawio.png)
+![ER図](flema.drawio.png)
 
 ## URL
 - 開発環境： http://localhost/
