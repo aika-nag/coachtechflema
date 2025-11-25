@@ -16,12 +16,20 @@
 5. php artisan migrate
 6. php artisan db:seed
 
-## 使用技術
-- PHP8.1
+## 使用技術（実行環境）
+- PHP8.4.1
+- JavaScript
 - Laravel8.83.8
 - MySQL8.0.26
+- nginx1.21.1
+- mailhog1.0.1
+
+## ER図
+![ER図](src/flema.drawio.png)
 
 ## URL
 - 開発環境： http://localhost/
+- ユーザー登録： http://localhost/register
 - phpMyAdmin: http://localhost:8080/
+- mailhog: http://localhost:8025/
 
