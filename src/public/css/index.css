@@ -1,4 +1,4 @@
-.title {
+.link {
     display: flex;
     align-items: flex-end;
     height: 94px;
@@ -7,25 +7,25 @@
     border-bottom: 2px solid #5f5f5f;
 }
 
-.recommend_link {
+.recommend-link {
     text-decoration: none;
 }
 
-.login_recommend {
+.login-recommend {
     margin: auto 0 0 127px;
     width: 155px;
     padding-left: 40px;
     color: #5f5f5f;
 }
 
-.recommend {
+.guest-recommend {
     margin: auto 0 0 127px;
     width: 155px;
     padding-left: 40px;
     color: #ff0000;
 }
 
-.login_mylist {
+.login-mylist {
     border: none;
     background-color: #ffffff;
     margin: auto 0 0 50px;
@@ -36,7 +36,7 @@
     font-weight: bold;
 }
 
-.mylist {
+.guest-mylist {
     border: none;
     background-color: #ffffff;
     margin: auto 0 0 50px;
@@ -45,19 +45,12 @@
     color: #5f5f5f;
     font-size: 24px;
     font-weight: bold;
-}
-
-.item_list {
-    display: flex;
-    justify-content: center;
 }
 
 .items {
     margin: 75px auto;
     width: 90%;
     display: grid;
-    justify-items: center;
-    align-items: center;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-rows: 1fr 1fr 1fr 1fr;
     gap: 71px;
@@ -69,7 +62,7 @@
     grid-template-columns: subgrid;
 }
 
-.sold {
+.item-classify {
     width: 0;
     height: 0;
     border-left: 60px solid transparent;
@@ -81,7 +74,7 @@
     left: -39px;
 }
 
-.character {
+.sold {
     color: #ffffff;
     font-weight: bold;
     writing-mode: vertical-lr;
@@ -89,7 +82,6 @@
     position: absolute;
     top: 42px;
     left: -47px;
-    float: left;
 }
 
 .image {
@@ -98,113 +90,13 @@
     border-radius: 4px;
 }
 
-.item_name {
+.item-name {
     margin-top: 9px;
     margin-bottom: 0;
 }
 
-@media (max-width: 1299px) {
-    .search::placeholder {
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 1129px) {
-    .search::placeholder {
-        font-size: 8px;
-    }
-}
-
-@media (max-width: 1040px) {
-    .logo {
-        width: 50%;
-        padding-left: 20px;
-    }
-
-    .header-site-menu {
-        background-color: #5f5f5f;
-        flex: none;
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 50vw;
-        height: 30%;
-        transition: right 0.3s ease;
-        z-index: 10;
-    }
-
-    .header-site-menu.open {
-        flex: none;
-        background-color: #5f5f5f;
-        top: 82px;
-        right: 0;
-        display: block;
-    }
-
-    .toggle-menu-button {
-        display: block;
-        width: 15%;
-        height: 82px;
-        background-image: url(../images/menu.png);
-        background-size: 50%;
-        background-position: center;
-        background-repeat: no-repeat;
-        border: 3px solid #000000;
-        border-radius: 10px;
-        background-color: #ffffff;
-    }
-
-    .nav {
-        display: block;
-        text-align: center;
-    }
-
-    .logout {
-        width: 100%;
-        padding-left: 20px;
-        border-bottom: 1px solid #ffffff;
-    }
-
-    .logout_button {
-        width: fit-content;
-    }
-
-    .mypage {
-        width: 100%;
-        padding-left: 20px;
-        border-bottom: 1px solid #ffffff;
-    }
-
-    .mypage_button {
-        width: fit-content;
-    }
-
-    .sell {
-        width: 100%;
-        margin: 0;
-        padding-left: 26px;
-        border-bottom: 1px solid #ffffff;
-    }
-
-    .sell_button {
-        width: fit-content;
-        background-color: #0000;
-        color: #ffff;
-        border: none;
-        padding: 0;
-    }
-
-    .input_bar {
-        width: 100%;
-        padding-left: 26px;
-    }
-
-    .search::placeholder {
-        font-size: 16px;
-    }
-
+@media (max-width: 1144px) {
     .items {
-        display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         grid-template-rows: 1fr 1fr 1fr;
         gap: 50px;
@@ -213,17 +105,10 @@
 
 @media (max-width: 768px) {
     .items {
-        display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 20px;
         box-sizing: border-box;
         padding: 0 10px;
-    }
-
-    .item {
-        position: relative;
-        display: grid;
-        grid-template-columns: subgrid;
     }
 
     .image {
@@ -234,39 +119,39 @@
 }
 
 @media (max-width: 500px) {
-    .login_recommend {
+    .login-recommend {
         margin: auto 0 0 40px;
         width: auto;
-        padding-left: 40px;
-        color: #5f5f5f;
     }
 
-    .recommend {
+    .guest-recommend {
         margin: auto 0 0 40px;
         width: auto;
-        padding-left: 40px;
-        color: #ff0000;
     }
 
-    .login_mylist {
-        border: none;
-        background-color: #ffffff;
+    .login-mylist {
         margin: auto 0 0 30px;
         width: auto;
-        padding-right: 0;
-        color: #ff0000;
-        font-size: 24px;
-        font-weight: bold;
     }
 
-    .mylist {
-        border: none;
-        background-color: #ffffff;
+    .guest-mylist {
         margin: auto 0 0 30px;
         width: auto;
-        padding-right: 0;
-        color: #5f5f5f;
-        font-size: 24px;
-        font-weight: bold;
+    }
+
+    .item-classify {
+        border-left: 50px solid transparent;
+        border-right: 50px solid transparent;
+        border-bottom: 50px solid #ff0000;
+        transform: rotate(-45deg);
+        position: absolute;
+        top: -7.5px;
+        left: -32px;
+    }
+
+    .sold {
+        font-size: 14px;
+        top: 36px;
+        left: -42px;
     }
 }

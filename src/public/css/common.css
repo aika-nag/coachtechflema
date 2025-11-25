@@ -1,15 +1,12 @@
 .header {
     height: 82px;
     background-color: black;
-    align-items: center;
     width: 100%;
 }
 
-.header_inner {
+.header-inner {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    height: 82px;
 }
 
 .header-site-menu {
@@ -20,19 +17,17 @@
 .logo {
     display: flex;
     align-items: center;
-    justify-content: center;
     padding-left: 40px;
-    width: auto;
     height: 82px;
 }
 
-.logo_image {
+.logo-image {
     height: 40px;
     width: 100%;
     display: block;
 }
 
-.input_bar {
+.search {
     padding: 15px 31px;
     width: 55%;
 }
@@ -42,7 +37,6 @@
     justify-content: center;
     padding-right: 27px;
     align-items: center;
-    width: auto;
     min-width: 453px;
 }
 
@@ -56,13 +50,12 @@
     display: flex;
 }
 
-.logout_button {
+.logout-button {
     width: 100%;
     background-color: #0000;
     color: #ffff;
     border: none;
     font-size: 24px;
-    justify-content: center;
 }
 
 .mypage {
@@ -71,13 +64,12 @@
     display: flex;
 }
 
-.mypage_button {
+.mypage-button {
     width: 100%;
     background-color: #0000;
     color: #ffff;
     border: none;
     font-size: 24px;
-    justify-content: center;
 }
 
 .sell {
@@ -85,18 +77,16 @@
     height: 50px;
     margin-left: 5%;
     display: flex;
-    align-items: center;
 }
 
-.sell_button {
+.sell-button {
     width: 100%;
     border-radius: 4px;
     padding: 1px 20px;
     font-size: 24px;
-    justify-content: center;
 }
 
-.search::placeholder {
+.keyword::placeholder {
     font-size: 24px;
     color: #000000;
     opacity: 0.7;
@@ -104,12 +94,105 @@
     text-align: center;
 }
 
-.search {
-    margin: 0;
+.keyword {
     width: 100%;
     height: 50px;
 }
 
 .error {
     color: #ff5555;
+}
+
+@media(max-width: 1299px) {
+    .keyword::placeholder {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 1144px) {
+    .logo {
+        width: 50%;
+        padding-left: 20px;
+    }
+
+    .header-site-menu {
+        background-color: #5f5f5f;
+        flex: none;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 50vw;
+        height: 30%;
+        transition: right 0.3s ease;
+        z-index: 10;
+    }
+
+    .header-site-menu.open {
+        flex: none;
+        background-color: #5f5f5f;
+        top: 82px;
+        right: 0;
+        display: block;
+    }
+
+    .toggle-menu-button {
+        display: block;
+        width: 15%;
+        height: 82px;
+        background-image: url(../images/menu.png);
+        background-size: 50%;
+        background-position: center;
+        background-repeat: no-repeat;
+        border: 3px solid #000000;
+        border-radius: 10px;
+        background-color: #ffffff;
+    }
+
+    .nav {
+        display: block;
+    }
+
+    .logout {
+        width: 100%;
+        padding-left: 20px;
+        border-bottom: 1px solid #ffffff;
+    }
+
+    .logout-button {
+        width: fit-content;
+    }
+
+    .mypage {
+        width: 100%;
+        padding-left: 20px;
+        border-bottom: 1px solid #ffffff;
+    }
+
+    .mypage-button {
+        width: fit-content;
+    }
+
+    .sell {
+        width: 100%;
+        margin: 0;
+        padding-left: 26px;
+        border-bottom: 1px solid #ffffff;
+    }
+
+    .sell-button {
+        width: fit-content;
+        background-color: #0000;
+        color: #ffff;
+        border: none;
+        padding: 0;
+    }
+
+    .search {
+        width: 100%;
+        padding-left: 26px;
+    }
+
+    .keyword::placeholder {
+        font-size: 16px;
+    }
 }

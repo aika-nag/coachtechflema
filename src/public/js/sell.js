@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const sellImage = document.getElementById('sell_image');
+    const sellImage = document.getElementById('sell-image');
     const preview = document.getElementById('preview');
 
     sellImage.addEventListener('change', event => {

@@ -21,7 +21,12 @@ class ItemController extends Controller
     {
         $input = '';
         $user = auth()->user();
+
+        if($user){
         $items = Item::where('user_id', '!=', $user->id)->get();
+        } else {
+            $items = Item::all();
+        }
         return view('index', compact('input','items'));
     }
 
@@ -81,9 +86,9 @@ class ItemController extends Controller
 
         if ($user != null) {
         //Favoritesテーブルからログインユーザーのいいね情報のみを抽出→更にitem_idのみを抽出
-        $userfavorites = Favorite::where('user_id', $user->id)->get()->pluck('item_id');
+        $userfavorites = Favorite::where('user_id', $user->id)->pluck('item_id');
         //抽出したIDに合致するItemレコードを取り出す
-        $favoriteitems = Item::find($userfavorites);
+        $favoriteitems = Item::whereIn('id', $userfavorites)->get();
 
         $mylist = [
             'input' => $request->input('search'),
