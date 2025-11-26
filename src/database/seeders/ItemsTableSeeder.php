@@ -22,7 +22,7 @@ class ItemsTableSeeder extends Seeder
             'price' => '15000',
             'condition' => '1',
             'user_id' => '1',
-            'image' => '/dammy1Clock.jpg'
+            'image' => 'dammy1Clock.jpg'
         ];
         DB::table('items')->insert($param);
         $param = [
@@ -32,7 +32,7 @@ class ItemsTableSeeder extends Seeder
             'price' => '5000',
             'condition' => '2',
             'user_id' => '2',
-            'image' => '/dammy2HDD.jpg'
+            'image' => 'dammy2HDD.jpg'
         ];
         DB::table('items')->insert($param);
         $param = [
@@ -42,7 +42,7 @@ class ItemsTableSeeder extends Seeder
             'price' => '300',
             'condition' => '3',
             'user_id' => '3',
-            'image' => '/dammy3onion.jpg'
+            'image' => 'dammy3onion.jpg'
         ];
         DB::table('items')->insert($param);
         $param = [
@@ -52,7 +52,7 @@ class ItemsTableSeeder extends Seeder
             'price' => '4000',
             'condition' => '4',
             'user_id' => '4',
-            'image' => '/dammy4shoes.jpg'
+            'image' => 'dammy4shoes.jpg'
         ];
         DB::table('items')->insert($param);
         $param = [
@@ -62,7 +62,7 @@ class ItemsTableSeeder extends Seeder
             'price' => '45000',
             'condition' => '1',
             'user_id' => '5',
-            'image' => '/dammy5pc.jpg'
+            'image' => 'dammy5pc.jpg'
         ];
         DB::table('items')->insert($param);
         $param = [
@@ -72,7 +72,7 @@ class ItemsTableSeeder extends Seeder
             'price' => '8000',
             'condition' => '2',
             'user_id' => '6',
-            'image' => '/dammy6mike.jpg'
+            'image' => 'dammy6mike.jpg'
         ];
         DB::table('items')->insert($param);
         $param = [
@@ -82,7 +82,7 @@ class ItemsTableSeeder extends Seeder
             'price' => '3500',
             'condition' => '3',
             'user_id' => '7',
-            'image' => '/dammy7bag.jpg'
+            'image' => 'dammy7bag.jpg'
         ];
         DB::table('items')->insert($param);
         $param = [
@@ -92,7 +92,7 @@ class ItemsTableSeeder extends Seeder
             'price' => '500',
             'condition' => '4',
             'user_id' => '8',
-            'image' => '/dammy8Tumbler.jpg'
+            'image' => 'dammy8Tumbler.jpg'
         ];
         DB::table('items')->insert($param);
         $param = [
@@ -102,7 +102,7 @@ class ItemsTableSeeder extends Seeder
             'price' => '4000',
             'condition' => '1',
             'user_id' => '9',
-            'image' => '/dammy9coffee.jpg'
+            'image' => 'dammy9coffee.jpg'
         ];
         DB::table('items')->insert($param);
         $param = [
@@ -112,7 +112,7 @@ class ItemsTableSeeder extends Seeder
             'price' => '2500',
             'condition' => '2',
             'user_id' => '10',
-            'image' => '/dammy10make.jpg'
+            'image' => 'dammy10make.jpg'
         ];
         DB::table('items')->insert($param);
     }
