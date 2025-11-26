@@ -24,14 +24,14 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::post('/item/{item_id}/favorite', [ItemController::class, 'favorite']);
     Route::get('/sell', [ItemController::class, 'sell']);
     Route::post('/sell', [ItemController::class, 'create']);
-    Route::get('/mypage', [ProfileController::class, 'mypage']);
-    Route::post('/mypage', [ProfileController::class, 'sell_buy']);
+    Route::get('/mypage', [ProfileController::class, 'myPage']);
+    Route::post('/mypage', [ProfileController::class, 'sellBuyItem']);
     Route::post('/mypage/profile', [ProfileController::class, 'store']);
     Route::get('/mypage/profile', [ProfileController::class, 'index']);
     Route::post('/item/{item_id}/comments', [CommentController::class, 'store']);
     Route::get('/purchase/{item}', [OrderController::class, 'purchase']);
     Route::post('/purchase/{item_id}', [OrderController::class, 'order']);
-    Route::get('/purchase/deliveryaddress/{item_id}', [OrderController::class, 'changeAddress']);
+    Route::post('/purchase/address/{item_id}', [OrderController::class, 'changeAddress']);
     Route::get('/purchase/address/{item_id}', [OrderController::class, 'editAddress']);
 });
 
@@ -40,7 +40,7 @@ Route::get('/login', [Controller::class, 'login'])->name('login');
 Route::get('/item/{item_id}', [ItemController::class,'detail']);
 
 Route::post('/item/find', [ItemController::class, 'search']);
-Route::post('/', [ItemController::class, 'mylist']);
+Route::post('/', [ItemController::class, 'myList']);
 
 
 

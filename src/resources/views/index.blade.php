@@ -37,6 +37,11 @@
 @endsection
 
 @section('content')
+@if (session('message'))
+    <div class="alert">
+        {{ session('message') }}
+    </div>
+@endif
 <div class="link">
     <a href="/" class="recommend-link"><p class="@if(Auth::check()) login-recommend @else guest-recommend @endif">おすすめ</p></a>
     <form action="/?tab=mylist" method="post">

@@ -118,6 +118,12 @@
     font-weight: bold;
 }
 
+.input-area::placeholder {
+    font-size: 24px;
+    color: #000000;
+    padding: 12px;
+}
+
 @media(max-width:1040px) {
     .content {
         width: 80%;

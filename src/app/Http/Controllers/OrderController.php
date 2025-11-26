@@ -58,15 +58,15 @@ class OrderController extends Controller
     {
         $user = auth()->user();
 
-        $Order = new Order();
-        $Order->buyer_id = $user->id;
-        $Order->item_id = $item_id->id;
-        $Order->payment = $request->payment;
-        $Order->delivery_zipcode = $request->zipcode;
-        $Order->delivery_address = $request->address;
-        $Order->delivery_building = $request->building;
+        $order = new Order();
+        $order->buyer_id = $user->id;
+        $order->item_id = $item_id->id;
+        $order->payment = $request->payment;
+        $order->delivery_zipcode = $request->zipcode;
+        $order->delivery_address = $request->address;
+        $order->delivery_building = $request->building;
 
-        $Order->save();
+        $order->save();
 
         return redirect('/');
     }

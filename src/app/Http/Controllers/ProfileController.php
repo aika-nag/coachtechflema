@@ -24,17 +24,17 @@ class ProfileController extends Controller
     public function store(ProfileRequest $request)
     {
         $user = auth()->user();
-        $existingProfile = Profile::where('user_id', $user->id)->first();
-        if($existingProfile) {
+        $profileExists = Profile::where('user_id', $user->id)->first();
+        if($profileExists) {
 
             if ($request->hasFile('image')) {
                 $original = $request->image->getClientOriginalName();
                 $name = date('Ymd_His') . '_' . $original;
                 $path = $request->file('image')->move('storage/images', $name);
-                Storage::disk('public')->delete('images/'. $existingProfile->image);
-                $existingProfile->update(['image' => $name ]);
+                Storage::disk('public')->delete('images/'. $profileExists->image);
+                $profileExists->update(['image' => $name ]);
             }
-            $existingProfile->update([
+            $profileExists->update([
                 'user_id' => $user->id,
                 'name' => $request->name,
                 'zipcode' => $request->zipcode,
@@ -43,31 +43,30 @@ class ProfileController extends Controller
             ]);
             return redirect('/mypage');
         } else {
-        $profile = new Profile();
-        $profile->user_id = $user->id;
-        $profile->name = $request->name;
-        $profile->zipcode = $request->zipcode;
-        $profile->address = $request->address;
-        $profile->building = $request->building;
+            $profile = new Profile();
+            $profile->user_id = $user->id;
+            $profile->name = $request->name;
+            $profile->zipcode = $request->zipcode;
+            $profile->address = $request->address;
+            $profile->building = $request->building;
 
-          if($request->hasFile('image')) {
-            $original = $request->image->getClientOriginalName();
-            $name = date('Ymd_His').'_'.$original;
-            $path = $request->file('image')->move('storage/images', $name);
-            $profile->image = $name;
-          }
+            if($request->hasFile('image')) {
+                $original = $request->image->getClientOriginalName();
+                $name = date('Ymd_His').'_'.$original;
+                $path = $request->file('image')->move('storage/images', $name);
+                $profile->image = $name;
+            }
 
-        $profile->save();
+            $profile->save();
 
-        $input = '';
-        $items = Item::all();
+            $input = '';
+            $items = Item::all();
 
-        return redirect('/');
+            return redirect('/');
         }
-
     }
 
-    public function mypage(Request $request)
+    public function myPage(Request $request)
     {
         $user = auth()->user();
         $profile = Profile::where('user_id', $user->id)->first();
@@ -78,7 +77,7 @@ class ProfileController extends Controller
         return view('mypage', compact('profile', 'input', 'items'));
     }
 
-    public function sell_buy(Request $request)
+    public function sellBuyItem(Request $request)
     {
         $user = auth()->user();
         $profile = Profile::where('user_id', $user->id)->first();

@@ -46,7 +46,7 @@
             <p class="category-tag">カテゴリー</p>
             <div class="category-flex">
                 @foreach ($categories as $category)
-                <label class="tag"><input type="checkbox" class="tag-name" name="category" value="{{ $category['id'] }}">{{ $category['name']}}</label>
+                <label class="tag"><input type="checkbox" class="tag-name" name="category[]" value="{{ $category['id'] }}">{{ $category['name']}}</label>
                 @endforeach
             </div>
             @error('category')
@@ -80,7 +80,7 @@
         <p class="error">{{ $message }}</p>
         @enderror
         <label class="sell-title" for="price">販売価格</label>
-        <input type="text" id="price" name="price" class="input-area">
+        <input type="text" id="price" name="price" class="input-area" placeholder="¥">
         @error('price')
         <p class="error">{{ $message }}</p>
         @enderror

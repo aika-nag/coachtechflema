@@ -9,7 +9,10 @@ use App\Models\User;
 use App\Models\Item;
 use App\Models\Order;
 use App\Models\Favorite;
-use Database\Seeders\ItemsTableSeeder;
+use App\Models\Profile;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+
 
 class HelloTest extends TestCase
 {
@@ -347,4 +350,57 @@ class HelloTest extends TestCase
         $response->assertViewHas('items', null);
     }
 
+    public function testGetProfile()
+    {
+        /** @var \Illuminate\Contracts\Auth\Authenticatable $user */
+        $user = User::factory()->create();
+
+        $profile = Profile::factory()->create([
+            'user_id' => $user->id,
+            'name' => $user->name,
+            'image' => 'default_icon.png'
+        ]);
+
+        $sellItem = Item::factory()->create([
+            'user_id' => $user->id,
+            'name' => 'テスト腕時計'
+        ]);
+
+        $userOrder = Order::factory()->create([
+            'buyer_id' => $user->id,
+        ]);
+        $buyItem = $userOrder->item;
+
+        $response = $this->actingAs($user)->get('/mypage');
+        $response->assertStatus(200);
+        $response->assertSee($profile->name);
+        $response->assertSee($profile->image);
+
+        $response = $this->post('/mypage?page=buy');
+        $response->assertSee($buyItem->name);
+
+        $response = $this->post('/mypage?page=sell');
+        $response->assertSee($sellItem->name);
+    }
+
+    public function testEditProfile()
+    {
+        /** @var \Illuminate\Contracts\Auth\Authenticatable $user */
+        $user = User::factory()->create();
+
+        $profile = Profile::factory()->create([
+            'user_id' => $user->id,
+            'name' => $user->name,
+            'image' => 'default_icon.png'
+        ]);
+
+        $response = $this->actingAs($user)->get('/mypage/profile');
+        $response->assertStatus(200);
+
+        $response->assertSee($profile->name);
+        $response->assertSee($profile->zipcode);
+        $response->assertSee($profile->address);
+        $response->assertSee($profile->building);
+        $response->assertSee($profile->image);
+    }
 }

@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\Item;
-use App\Models\CategoryItem;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Favorite;
-use App\Models\User;
 use App\Models\Category_item;
 use App\Http\Requests\ExhibitionRequest;
 
@@ -64,10 +62,10 @@ class ItemController extends Controller
     public function favorite(Item $item_id)
     {
         $user = auth()->user();
-        $existingFavorite = Favorite::where('item_id', $item_id->id)->where('user_id', $user->id)->first();
+        $favoriteExists = Favorite::where('item_id', $item_id->id)->where('user_id', $user->id)->first();
 
-        if($existingFavorite) {
-            $existingFavorite->delete();
+        if($favoriteExists) {
+            $favoriteExists->delete();
 
         } else {
             Favorite::create([
@@ -79,23 +77,23 @@ class ItemController extends Controller
 
     }
 
-    public function mylist(Request $request)
+    public function myList(Request $request)
     {
         //ログイン中のユーザーidを取得
         $user = auth()->user();
 
         if ($user != null) {
         //Favoritesテーブルからログインユーザーのいいね情報のみを抽出→更にitem_idのみを抽出
-        $userfavorites = Favorite::where('user_id', $user->id)->pluck('item_id');
+        $userFavorites = Favorite::where('user_id', $user->id)->pluck('item_id');
         //抽出したIDに合致するItemレコードを取り出す
-        $favoriteitems = Item::whereIn('id', $userfavorites)->get();
+        $favoriteItems = Item::whereIn('id', $userFavorites)->get();
 
-        $mylist = [
+        $myList = [
             'input' => $request->input('search'),
-            'items' => $favoriteitems,
+            'items' => $favoriteItems,
         ];
 
-        return view('index', $mylist);
+        return view('index', $myList);
     }
         else {
         $data = [
@@ -111,41 +109,38 @@ class ItemController extends Controller
     {
         $user = auth()->user();
 
-        $Item = new Item();
-        $Item->user_id = $user->id;
-        $Item->name = $request->name;
-        $Item->brand = $request->brand;
-        $Item->description = $request->description;
-        $Item->price = $request->price;
-        $Item->condition = $request->condition;
+        $item = new Item();
+        $item->user_id = $user->id;
+        $item->name = $request->name;
+        $item->brand = $request->brand;
+        $item->description = $request->description;
+        $item->price = $request->price;
+        $item->condition = $request->condition;
 
 
         $original = $request->file('image')->getClientOriginalName();
         $name = date('Ymd_His') . '_' . $original;
         $request->file('image')->move('storage/images', $name);
 
-        $Item->image = $name;
+        $item->image = $name;
 
-        $Item->save();
+        $item->save();
 
         $categories = $request->category;
 
         foreach($categories as $category)
         {
-            $category_item = new Category_item();
-            $category_item->item_id = $Item->id;
-            $category_item->category_id = $category;
+            $categoryItem = new Category_item();
+            $categoryItem->item_id = $item->id;
+            $categoryItem->category_id = $category;
 
-            $category_item->save();
+            $categoryItem->save();
         }
-
-        $input = '';
-        $items = Item::all();
 
         return redirect('/')->with('message', '出品しました');
     }
 
-    public function sell_index()
+    public function sellIndex()
     {
         $user = auth()->user();
         $items = Item::where('user_id', $user->id)->get();

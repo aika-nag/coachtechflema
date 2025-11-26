@@ -40,7 +40,6 @@
         <button class="register-button">登録する</button>
     </form>
     <form action="/login" method="get" class="login-form">
-        @csrf
         <button class="login-button">ログインはこちら</button>
     </form>
 </div>

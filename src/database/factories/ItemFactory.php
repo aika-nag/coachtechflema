@@ -23,7 +23,7 @@ class ItemFactory extends Factory
             'price' => $this->faker->numberBetween(300,40000),
             'condition' => $this->faker->numberBetween(1,4),
             'user_id' => User::factory(),
-            'image' => '/dammy'.'.jpg'
+            'image' => '/dammy'. $count++. '.jpg'
         ];
     }
 }

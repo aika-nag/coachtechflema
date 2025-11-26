@@ -28,7 +28,7 @@
 <div class="user-profile">
     @if(isset($profile))
     @if($profile['image'] != null)
-    <img src="{{ asset('storage/images/'.$profile['image']) }}" alt="アイコン画像" class="icon">
+    <img src="{{ asset('storage/images/'.$profile['image']) }}" alt="アイコン画像" class="icon" id="icon">
     @else
     <img src="{{ asset('images/default_icon.png') }}" alt="アイコン画像を登録できます" class="icon">
     @endif

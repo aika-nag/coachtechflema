@@ -67,7 +67,7 @@
                 </div>
                 @endif
                 @else
-                <div class="function_favorite">
+                <div class="function-favorite">
                     <img src="../../../images/favorite.png" alt="いいね" class="favorite-star">
                     <span class="uncount">{{ $item->favorites->count() }}</span>
                 </div>

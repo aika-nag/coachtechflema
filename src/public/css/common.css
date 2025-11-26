@@ -99,7 +99,7 @@
     height: 50px;
 }
 
-.error {
+.error, .alert {
     color: #ff5555;
 }
 
