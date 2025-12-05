@@ -1,5 +1,9 @@
 # coachtechフリマアプリ
 
+## 概要
+アイテムの出品と購入ができるフリマアプリです。ゲストユーザーは、商品一覧画面と商品詳細画面を閲覧できます。  
+会員登録をすると、いいね・コメント・マイリスト登録・商品の購入・出品といった機能が利用できます。
+
 ## 環境構築
 
 ### Dockerビルド
@@ -38,3 +42,18 @@
 - phpMyAdmin: http://localhost:8080/
 - mailhog: http://localhost:8025/
 
+## サンプルアカウント
+UsersTableSeederによりあらかじめメール認証済みのログイン用ユーザーが２名登録されています。  
+開発時や動作確認の際にご利用ください。
+- ログインURL：http://localhost/login
+### 🔑サンプルユーザー情報
+1. 山田花子（出品商品なし）
+   - Email   : hanako@test.jp
+   - Password: coachhanako
+2. 鈴木一郎（ダミー商品１〜５を出品）
+   - Email   : ichiro@test.jp
+   - Password: techichiro
+
+## テスト
+PHPUnitを用いた自動テストを導入しています。主要な実装機能ごとにテストケースを用意しています。
+### テスト実行
