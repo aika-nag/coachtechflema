@@ -35,13 +35,10 @@ class OrderController extends Controller
             'building' => $request->building
         );
 
-        $data = [
-            'item' => $item_id,
-            'profile' => $profile,
-            'payment' => $request->payment
-        ];
+        $item = $item_id->id;
 
-        return view('purchase',$data);
+        return redirect("/purchase/{$item}")->with(compact(
+            'profile'));
     }
 
     public function editAddress(Request $request, Item $item_id)
@@ -57,6 +54,7 @@ class OrderController extends Controller
     public function order(PurchaseRequest $request, Item $item_id)
     {
         $user = auth()->user();
+        dd($request);
 
         $order = new Order();
         $order->buyer_id = $user->id;
