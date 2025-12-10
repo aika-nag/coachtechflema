@@ -30,7 +30,7 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('/mypage/profile', [ProfileController::class, 'index']);
     Route::post('/item/{item_id}/comments', [CommentController::class, 'store']);
     Route::post('/purchase/address/{item_id}', [OrderController::class, 'changeAddress']);
-    Route::get('/purchase/{item}', [OrderController::class, 'purchase']);
+    Route::get('/purchase/{item}', [OrderController::class, 'purchase'])->name('purchase');
     Route::post('/purchase/{item_id}', [OrderController::class, 'order']);
     Route::get('/purchase/address/{item_id}', [OrderController::class, 'editAddress']);
 });

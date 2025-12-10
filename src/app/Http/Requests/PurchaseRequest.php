@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
 
 class PurchaseRequest extends FormRequest
 {
@@ -38,5 +40,19 @@ class PurchaseRequest extends FormRequest
             'zipcode.required' => '配送先住所(郵便番号)を入力してください',
             'address.required' => '配送先住所を入力してください'
         ];
+    }
+
+    /**
+     *  このメソッドを追記
+     * @param Validator $validator
+     */
+    protected function failedValidation(Validator $validator)
+    {
+
+    }
+
+    public function getValidator()
+    {
+        return $this->validator;
     }
 }

@@ -35,10 +35,9 @@ class OrderController extends Controller
             'building' => $request->building
         );
 
-        $item = $item_id->id;
+        $item = $item_id;
 
-        return redirect("/purchase/{$item}")->with(compact(
-            'profile'));
+        return view('purchase', ['profile' => $profile, 'item' => $item]);
     }
 
     public function editAddress(Request $request, Item $item_id)
@@ -53,8 +52,12 @@ class OrderController extends Controller
 
     public function order(PurchaseRequest $request, Item $item_id)
     {
+        $item = $item_id->id;
+        $validator = $request->getValidator();
+        if($validator->fails()){
+            return redirect()->route('purchase',$item)->withErrors($validator)->withInput();
+        }
         $user = auth()->user();
-        dd($request);
 
         $order = new Order();
         $order->buyer_id = $user->id;

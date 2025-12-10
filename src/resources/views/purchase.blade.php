@@ -25,7 +25,7 @@
 @endsection
 
 @section('content')
- <form action="/purchase/{{{ $item->id }}}" method="post">
+ <form action="/purchase/{{ $item->id }}" method="post">
     @csrf
     <div class="content">
         <div class="order">
@@ -50,12 +50,15 @@
             <div class="shipping">
                 <div class="shipping-address">
                     <p class="address">配送先</p>
-                    <a href="/purchase/address/{{{ $item->id }}}" class="change-address">変更する</a>
+                    <a href="/purchase/address/{{ $item->id }}" class="change-address">変更する</a>
                 </div>
                 <div class="profile">
-                    <p class="zipcode" >{{ $profile['zipcode'] }}</p>
-                    <p class="profile-address">{{ $profile['address']}}</p>
-                    <p class="profile-address">{{ $profile['building'] }}</p>
+                    <p class="zipcode" >{{ old('zipcode', $profile['zipcode']) }}</p>
+                    <input type="hidden" name="zipcode" value="{{ old('zipcode', $profile['zipcode']) }}">
+                    <p class="profile-address">{{ old('address', $profile['address']) }}</p>
+                    <input type="hidden" name="address" value="{{ old('address', $profile['address']) }}">
+                    <p class="profile-address">{{ old('building', $profile['building']) }}</p>
+                    <input type="hidden" name="building" value="{{ old('building', $profile['building']) }}">
                 </div>
             </div>
         </div>
