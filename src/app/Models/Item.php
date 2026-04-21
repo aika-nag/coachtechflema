@@ -10,7 +10,7 @@ class Item extends Model
     use HasFactory;
     public function categories()
     {
-        return $this->belongsToMany(category::class, 'category_items', 'item_id', 'category_id');
+        return $this->belongsToMany(Category::class, 'category_items', 'item_id', 'category_id');
     }
 
     public function user()

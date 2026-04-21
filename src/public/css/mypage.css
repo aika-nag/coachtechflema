@@ -55,9 +55,8 @@
     font-size: 24px;
     font-weight: bold;
     color: #FF0000;
-    border: none;
+    text-decoration: none;
     margin-left: 129px;
-    background-color: #FFFFFF;
     width: 155px;
     padding: 0;
 }
@@ -66,8 +65,7 @@
     font-size: 24px;
     font-weight: bold;
     color: #5F5F5F;
-    border: none;
-    background-color: #FFFFFF;
+    text-decoration: none;
     width: 155px;
     padding: 0;
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\Item;
 use App\Models\Category;
@@ -17,15 +18,29 @@ class ItemController extends Controller
     //
     public function index(Request $request)
     {
-        $input = '';
-        $user = auth()->user();
+        $tab = $request->query('tab');
+        $search = $request->query('search');
+        $query = Item::query();
+        $query->where('user_id', '<>', Auth::id());
 
-        if($user){
-        $items = Item::where('user_id', '!=', $user->id)->get();
-        } else {
-            $items = Item::all();
+        if($tab ==='mylist'){
+            if(!Auth::check()){
+                $query = null;
+                $items = null;
+                return view('index', compact('search', 'items'));
+            }
+            else{
+            //Favoritesテーブルからログインユーザーのいいね情報のみを抽出→更にitem_idのみを抽出
+            $userFavorites = Favorite::where('user_id', auth()->id())->pluck('item_id');
+            //抽出したIDに合致するItemレコードを取り出す
+            $query->whereIn('id', $userFavorites);
+            }
         }
-        return view('index', compact('input','items'));
+        if($search){
+            $query->where('name', 'like', "%{$search}%");
+        }
+        $items = $query->get();
+        return view('index', compact('search','items'));
     }
 
     public function detail(Item $item_id, Request $request)
@@ -45,7 +60,7 @@ class ItemController extends Controller
     {
         $items = Item::where('name', 'LIKE', "%{$request->input('search')}%")->get();
         $param = [
-            'input' => $request->input('search'),
+            'search' => $request->input('search'),
             'items' => $items
         ];
 
@@ -74,34 +89,6 @@ class ItemController extends Controller
         }
 
         return back();
-
-    }
-
-    public function myList(Request $request)
-    {
-        //ログイン中のユーザーidを取得
-        $user = auth()->user();
-
-        if ($user != null) {
-        //Favoritesテーブルからログインユーザーのいいね情報のみを抽出→更にitem_idのみを抽出
-        $userFavorites = Favorite::where('user_id', $user->id)->pluck('item_id');
-        //抽出したIDに合致するItemレコードを取り出す
-        $favoriteItems = Item::whereIn('id', $userFavorites)->get();
-
-        $myList = [
-            'input' => $request->input('search'),
-            'items' => $favoriteItems,
-        ];
-
-        return view('index', $myList);
-    }
-        else {
-        $data = [
-            'items' => null,
-            'input' => ''
-        ];
-            return view('index', $data);
-        }
 
     }
 

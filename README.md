@@ -55,5 +55,13 @@ UsersTableSeederによりあらかじめメール認証済みのログイン用�
    - Password: techichiro
 
 ## テスト
-PHPUnitを用いた自動テストを導入しています。主要な実装機能ごとにテストケースを用意しています。
+PHPUnitを用いた自動テストを導入しています。主要な実装機能ごとにテストケースを用意しています。  
+下記の方法でご利用ください。
 ### テスト実行
+1. docker-compose exec php bash
+2. php artisan test
+
+上記の方法では全機能のテストを一度に行います。
+各機能ごとにテストを行いたい場合は、上記２において
+php artisan test tests/Feature/LoginTest.php  
+のようにファイル名を指定してください。

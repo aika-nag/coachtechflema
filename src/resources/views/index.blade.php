@@ -7,7 +7,7 @@
 @section('search')
 <form action="/item/find" method="post" class="search-form">
     @csrf
-    <input type="text" class="keyword" name="search" placeholder="なにをお探しですか？" value="{{ $input }}">
+    <input type="text" class="keyword" name="search" placeholder="なにをお探しですか？" value="{{ $search??'' }}">
 </form>
 @endsection
 
@@ -43,11 +43,8 @@
     </div>
 @endif
 <div class="link">
-    <a href="/" class="recommend-link"><p class="@if(Auth::check()) login-recommend @else guest-recommend @endif">おすすめ</p></a>
-    <form action="/?tab=mylist" method="post">
-        @csrf
-        <button class="@if(Auth::check()) login-mylist @else guest-mylist @endif">マイリスト</button>
-    </form>
+    <a href="{{ route('index', ['tab'=> 'recommend', 'search'=> $search]) }}" class="recommend active">おすすめ</a>
+    <a href="{{ route('index', ['tab'=> 'mylist', 'search'=> $search]) }}" class="mylist">マイリスト</a>
 </div>
 <div class="items">
     @if($items != null)

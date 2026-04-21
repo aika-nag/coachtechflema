@@ -42,14 +42,8 @@
     </form>
 </div>
 <div class="link">
-    <form action="/mypage?page=sell" class="sell-link" method="post">
-        @csrf
-        <button class="sell-item" id="sell-item">出品した商品</button>
-    </form>
-    <form action="/mypage?page=buy" class="buy-link" method="post">
-        @csrf
-        <button class="buy-item" id="buy-item">購入した商品</button>
-    </form>
+    <a href="/mypage?page=sell" class="sell-item" id="sell-item">出品した商品</a>
+    <a href="/mypage?page=buy" class="buy-item" id="buy-item">購入した商品</a>
 </div>
 <div class="items">
     @if(isset($items))

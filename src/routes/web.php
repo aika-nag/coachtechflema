@@ -25,7 +25,6 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('/sell', [ItemController::class, 'sell']);
     Route::post('/sell', [ItemController::class, 'create']);
     Route::get('/mypage', [ProfileController::class, 'myPage']);
-    Route::post('/mypage', [ProfileController::class, 'sellBuyItem']);
     Route::post('/mypage/profile', [ProfileController::class, 'store']);
     Route::get('/mypage/profile', [ProfileController::class, 'index']);
     Route::post('/item/{item_id}/comments', [CommentController::class, 'store']);
@@ -35,12 +34,11 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('/purchase/address/{item_id}', [OrderController::class, 'editAddress']);
 });
 
-Route::get('/', [ItemController::class, 'index']);
+Route::get('/', [ItemController::class, 'index'])->name('index');
 Route::get('/login', [Controller::class, 'login'])->name('login');
 Route::get('/item/{item_id}', [ItemController::class,'detail']);
 
 Route::post('/item/find', [ItemController::class, 'search']);
-Route::post('/', [ItemController::class, 'myList']);
 
 
 
